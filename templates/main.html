@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DYNAMICALL RANKING!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+</head>
+
+<body class="bg-secondary">
+<div class="container-fluid">
+    <h1 class="text-center">DYN RANKING</h1>
+
+    <table class="table table-dark table-striped">
+        <thead>
+        <tr>
+            <th class="text-center">Rank</th>
+            <th>Level</th>
+            <th>CSR</th>
+            <th>Supervisor</th>
+            <th>Calidad</th>
+            <th>Cruzado</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for item in RANKING_RES %}
+            <tr>
+                <td class="text-center">{{ loop.index }}</td>
+                <td>Level</td>
+                <td>{{ item['csr'] }}</td>
+                <td>{{ item['super'] }}</td>
+                <td>{{ item['notas'] }}</td>
+                <td><div class="progress-bar {{ item['promedio_color'] }} font-weight-bolder" style="width: {{ item['promedio'] }}%">{{ item['promedio'] }}%</div></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
