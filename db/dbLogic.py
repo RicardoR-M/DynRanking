@@ -92,8 +92,6 @@ class EngineBase:
                     'promedio_color': get_bootstrap_bolor(nota)
                 }
 
-            # print("SN: " + _.SN + " // " + str(nota))
-            # print(_)
         csr_notas = list(csr_notas.values())
         csr_notas.sort(key=lambda k: k['promedio'], reverse=True)
         return csr_notas
