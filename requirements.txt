@@ -1,15 +1,17 @@
-openpyxl
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: win-64
 ca-certificates=2019.6.16=hecc5488_0
 certifi=2019.6.16=py37_0
 click=7.0=py_0
+et_xmlfile=1.0.1=py_1001
 flask=1.0.3=py_0
 freetds=1.00.97=h7a1dbc1_0
 itsdangerous=1.1.0=py_0
+jdcal=1.4.1=py_0
 jinja2=2.10.1=py_0
 markupsafe=1.1.1=py37hfa6e2cd_0
+openpyxl=2.6.1=py_0
 openssl=1.1.1b=hfa6e2cd_2
 pip=19.1.1=py37_0
 pymssql=2.1.4=py37hfa6e2cd_0

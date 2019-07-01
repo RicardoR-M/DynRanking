@@ -4,3 +4,7 @@ def q_max_evas():
 
 def perfil_evaluador():
     return 'Monitoreo Calidad_Dynamicall'
+
+
+def get_total_levels():
+    return 8

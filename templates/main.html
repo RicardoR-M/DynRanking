@@ -5,37 +5,97 @@
     <title>DYNAMICALL RANKING!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src ="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+    <style>
+        {#Estilo para header statico y tabla ocupe el 93% de la pantalla#}
+        html,body {
+            height: 100%;
+        }
+        .table-responsive{
+            height:93%;
+            overflow:scroll;
+            overflow-x: hidden
+        }
+        thead tr:nth-child(1) th{
+            background: #343a40;
+            position: sticky;
+            top: -1px;
+            z-index: 10;
+        }
+    </style>
 </head>
 
 <body class="bg-secondary">
-<div class="container-fluid">
-    <h1 class="text-center">DYN RANKING</h1>
-
+{#<div class="container-fluid">#}
+<h1 class="text-center">DYN RANKING
+        {% if LOCAL %}
+            (LOCAL)
+        {% else %}
+            (LIVE)
+        {% endif %}
+</h1>
+<div class="table-responsive">
     <table class="table table-dark table-striped">
-        <thead>
-        <tr>
-            <th class="text-center">Rank</th>
-            <th>Level</th>
-            <th>CSR</th>
-            <th>Supervisor</th>
-            <th>Calidad</th>
-            <th>Cruzado</th>
-        </tr>
+        <thead style="flex: 0 0 auto">
+            <tr>
+                <th class="text-center" style="width: 5%">Rank</th>
+                <th class="text-center" style="width: 10%">Level</th>
+                <th style="width: 25%">CSR</th>
+                <th style="width: 25%">Supervisor</th>
+                <th style="width: 10%" class="text-center">Calidad</th>
+                <th style="width: 10%" class="text-center">Cruzado</th>
+                <th style="width: 15%" class="text-center">Promedio</th>
+            </tr>
         </thead>
 
         <tbody>
         {% for item in RANKING_RES %}
             <tr>
-                <td class="text-center">{{ loop.index }}</td>
-                <td>Level</td>
-                <td>{{ item['csr'] }}</td>
-                <td>{{ item['super'] }}</td>
-                <td>{{ item['notas'] }}</td>
-                <td><div class="progress-bar {{ item['promedio_color'] }} font-weight-bolder" style="width: {{ item['promedio'] }}%">{{ item['promedio'] }}%</div></td>
+                <td class="text-center align-middle h4">{{ loop.index }}</td>
+                <td class="text-center align-middle"><img src="{{ url_for('static', filename = 'ranking/' + item['level']) }}" width="80%" height=Auto alt="">
+                </td>
+                <td class="align-middle h5">{{ item['nombre'] }}</td>
+                <td class="align-middle h5">{{ item['supervisor'] }}</td>
+                <td class="align-middle">
+                    {% if item['promedio_interno'] == '-' %}
+                        <div class="text-center">-</div>
+                    {% else %}
+                        <div class="progress-bar font-weight-bolder {{ item['pbar_interno'] }}"
+                             style="width: {{ item['promedio_interno'] }}%">{{ item['promedio_interno'] }}%
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="align-middle">
+                    {% if item['promedio_cruzado'] == '-' %}
+                        <div class="text-center">-</div>
+                    {% else %}
+                        <div class="progress-bar font-weight-bolder {{ item['pbar_cruzado'] }}"
+                             style="width: {{ item['promedio_cruzado'] }}%">{{ item['promedio_cruzado'] }}%
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="text-center h4 align-middle">{{ item['promedio_global'] }} %</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    {% if SIZE != 0 %}
+        var $el = $(".table-responsive");
+        function anim() {
+          var st = $el.scrollTop();
+          var sb = $el.prop("scrollHeight")-$el.innerHeight();
+          $el.animate({scrollTop: st<sb/2 ? sb : 0}, {{ SIZE *2000}}, anim); //2 Segundos por cada item
+        }
+        function stop(){
+          $el.stop();
+        }
+        anim();
+        $el.hover(stop, anim);
+    {% endif %}
+
+</script>
 </body>
 </html>
