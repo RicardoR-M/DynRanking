@@ -1,0 +1,62 @@
+{% extends "baseRanking.html" %}
+{% block title %}DYNAMICALL RANKING!{% endblock %}
+
+{% block content %}
+<h1 class="text-center">DYN RANKING
+{#    {% if LOCAL %}#}
+{#        (LOCAL)#}
+{#    {% else %}#}
+{#        (LIVE)#}
+{#    {% endif %}#}
+    <span class="small">{{ moment(ctime).fromNow(refresh=True) }}</span>
+</h1>
+
+<div class="table-responsive">
+    <table class="table table-dark table-striped">
+        <thead style="flex: 0 0 auto">
+            <tr>
+                <th class="text-center" style="width: 5%">Rank</th>
+                <th class="text-center" style="width: 10%">Level</th>
+                <th style="width: 25%">CSR</th>
+                <th style="width: 25%">Supervisor</th>
+                <th style="width: 10%" class="text-center">Calidad</th>
+                <th style="width: 10%" class="text-center">Cruzado</th>
+                <th style="width: 15%" class="text-center">Promedio</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for item in RANKING_RES %}
+            <tr>
+                <td class="text-center align-middle h4">{{ loop.index }}</td>
+                <td class="text-center align-middle"><img src="{{ url_for('static', filename = 'ranking/' + item['level']) }}" width="80%" height=Auto alt="">
+                </td>
+                <td class="align-middle h5">{{ item['nombre'] }}</td>
+                <td class="align-middle h5">{{ item['supervisor'] }}</td>
+                <td class="align-middle">
+                    {% if item['interno'] is none %}
+                        <div class="text-center">-</div>
+                    {% else %}
+                        <div class="progress-bar font-weight-bolder {{ item['pbar_interno'] }}"
+                             style="width: {{ item['promedio_interno'] }}%">{{ item['interno'] }}%
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="align-middle">
+                    {% if item['cruzado'] is none %}
+                        <div class="text-center">-</div>
+                    {% else %}
+                        <div class="progress-bar font-weight-bolder {{ item['pbar_cruzado'] }}"
+                             style="width: {{ item['promedio_cruzado'] }}%">{{ item['cruzado'] }}%
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="text-center h4 align-middle">{{ item['promedio_global'] }} %</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
