@@ -26,7 +26,7 @@ def create_app(config_name):
     # debug_toolbar.init_app(app)
     db.init_app(app)
     # Si se utiliza create_all, especificar bind=None para que solo afecte a la DB principal y no a los binds
-    # db.create_all(app=app, bind=None)
+    db.create_all(app=app, bind=None)
     login_manager.init_app(app)
     migrate.init_app(app, db)
 
@@ -38,6 +38,8 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     from .dashboard import dash_blueprint
     app.register_blueprint(dash_blueprint, url_prefix='/dash')
+    from .csr import csr_blueprint
+    app.register_blueprint(csr_blueprint, url_prefix='/csr')
 
     # Attach routes and custom error pages here
     return app

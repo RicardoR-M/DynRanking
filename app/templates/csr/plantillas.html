@@ -1,0 +1,591 @@
+{% macro render_modal_tec(dict_item) -%}
+    <div class="modal fade" id="item_{{ dict_item.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                {#HEADER#}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="itemLabel">{{ dict_item.Cbo_estado }}</h5><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="container-fluid">
+                    <span class="font-weight-bold">Detalle: </span>{{ dict_item.DetalleLlamada }}
+                </div>
+
+                {#CUERPO#}
+                <div class="modal-body">
+                    {#BLOQUE1#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "1. Utiliza etiqueta de atención"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">1.1</th>
+                            <td>Saluda al cliente de acuerdo a lo indicado en el Manual de Campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.SaludaCliente == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.SaludaCliente }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.2</th>
+                            <td>Se dirige al cliente por su nombre durante el transcurso de la llamada, sin tutearlo en ninguna
+                                ocasión.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.SeDirigePorNombre == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeDirigePorNombre }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.3</th>
+                            <td>Interactua con el cliente mientras realiza las validaciones en el sistema.</td>
+                            <td class="text-center align-middle {% if dict_item.InteractuaConCliente == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.InteractuaConCliente }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.4</th>
+                            <td>Evita el uso de tecnicismos.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaUsoTecnicismos == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EvitaUsoTecnicismos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.5</th>
+                            <td>Se despide de acuerdo a lo indicado en el Manual de Campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.SeDespideComoIndicaManual == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeDespideComoIndicaManual }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 2#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "2. Identifica la necesidad del cliente"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">2.1</th>
+                            <td>Valida si la consulta o transacción corresponde a un producto/servicio/línea de la campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.ValidaConsultaTransaccion == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.ValidaConsultaTransaccion }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.2</th>
+                            <td>Si lo expuesto por el cliente no es claro, realiza preguntas de precisión o preguntas filtro.</td>
+                            <td class="text-center align-middle {% if dict_item.RealizaPreguntasPrecision == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.RealizaPreguntasPrecision }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.3</th>
+                            <td>Valida el MOTIVO REAL de la necesidad (información, preocupación, problema) mediante parafraseo o
+                                pregunta de confirmación.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaMotivoReal == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaMotivoReal }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.4</th>
+                            <td>De acuerdo a lo expuesto por el cliente valida si existe alguna atención previa por el mismo
+                                motivo.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaAtencionPrevia == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaAtencionPrevia }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 3#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "3. Responde de acuerdo con los procesos establecidos"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">3.1</th>
+                            <td>Valida en el CES el estado de los servicios y equipos, estado de cuenta y adicionalmente si se
+                                encuentra en averia.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaCES == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.ValidaCES }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2</th>
+                            <td>La atencion se realizo siguiendo el paso a paso de la herramienta o el proceso establecido en el
+                                portal de conocimiento (en caso no se encuentre en la herramienta), no se vuelve a evaluar el
+                                ingreso al CES.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.AtencionPasoAPaso == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.AtencionPasoAPaso }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.1</th>
+                            <td>Solicita el número de documento de identidad o RUC para identificar el servicio, en caso amerite
+                                solicita datos adicionales.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.SolicitaDNIRUC == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SolicitaDNIRUC }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.2</th>
+                            <td>Valida en TRACER que el servicio del cliente esta conectado, no se encuentra en averia y no tiene
+                                algun flag alarmado.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaTRACER == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaTRACER }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.3</th>
+                            <td>Verifica en la web de averias si el servicio esta afectado.</td>
+                            <td class="text-center align-middle {% if dict_item.VerificaWebAverias == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.VerificaWebAverias }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.4</th>
+                            <td>Verifica en Incognito si los parametros de los servicios estan correctos.</td>
+                            <td class="text-center align-middle {% if dict_item.VerificaParametrosServicios == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.VerificaParametrosServicios }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.5</th>
+                            <td>Para problemas con Internet, ingresa al EMTA y verifica la cantidad de equipos conectados vs. plan
+                                contratado (descarte de autosaturamiento), asi mismo verifica los parametros de configuración WiFi
+                                y valida con cliente si tuviese algún equipo repetidor.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ProblemasInternetIngresaEMTA == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ProblemasInternetIngresaEMTA }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.6</th>
+                            <td>Para telefonia, ingresa a JANUS y valida que la linea este configurada y tenga saldo, tambien se
+                                debe validar con el cliente si la linea esta en Tel 1 o Tel 1/2, en caso no haya servicio.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ProblemasTelefoniaIngresaJANUS == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ProblemasTelefoniaIngresaJANUS }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2.7</th>
+                            <td>Para internet, cuando el problema es con SmarTV se le sugiere que utilice internet de manera
+                                cableada.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ProblemasInternetSmarTV == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ProblemasInternetSmarTV }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.3</th>
+                            <td>La explicación brindada al cliente corresponde con el paso a paso de la herramienta o el proceso
+                                establecido en el portal de conocimiento (en caso no se encuentre en la herramienta).
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ExplicacionBrindadaCorresponde == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ExplicacionBrindadaCorresponde }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.4</th>
+                            <td>Valida con el cliente si la gestión/información brindada fue clara.</td>
+                            <td class="text-center align-middle {% if dict_item.ValidaConClienteInformacion == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaConClienteInformacion }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 4#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "4. Registra la información en el sistema"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">4.1</th>
+                            <td>Ejecuta las acciones en todos los aplicativos requeridos por la herramienta o por el proceso
+                                establecido en el portal de conocimiento (en caso no se encuentre en la herramienta) de
+                                acuerdo al diagnóstico.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.EjecutaAccionesAplicativos == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.EjecutaAccionesAplicativos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.2</th>
+                            <td>Se tipifica en SIAC o SGA acorde con la gestión.</td>
+                            <td class="text-center align-middle {% if dict_item.SeTipificaSIACSGA == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeTipificaSIACSGA }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.3</th>
+                            <td>Notas y/o Plantilla de la tipificación son correctas.</td>
+                            <td class="text-center align-middle {% if dict_item.NotasPlantillaTipificacion == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.NotasPlantillaTipificacion }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.4</th>
+                            <td>Se tipifica en SIAC o SGA durante la llamada.</td>
+                            <td class="text-center align-middle {% if dict_item.SeTipificaEnSIAC == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeTipificaEnSIAC }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 5#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "5. Mantiene la calma en todo momento"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">5.1</th>
+                            <td>Evita comentarios negativos de la empresa y/sus proveedores.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaComentariosNegativos == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.EvitaComentariosNegativos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5.2</th>
+                            <td>Evita palabras soeces.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaPalabraSoeces == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EvitaPalabraSoeces }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5.3</th>
+                            <td>Escucha al cliente sin interrumpirlo.</td>
+                            <td class="text-center align-middle {% if dict_item.EscuchaClienteSinInterrumpirlo == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EscuchaClienteSinInterrumpirlo }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 6#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "6. Recomendaciones/Beneficios al Cliente"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">6.1</th>
+                            <td>Partiendo del MOTIVO REAL de la necesidad, realiza recomendaciones y/o refuerza beneficios del
+                                servicio u oferta como arma de fidelización.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.MotivoRealNecesidad == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.MotivoRealNecesidad }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                {#OBSERVACIONES#}
+                <div class="container mt-2 border">
+                    <span class="font-weight-bold">Observaciones: </span>{{ dict_item.ObservacionesAspectoMejora }}
+                </div>
+
+                {#FOOTER#}
+                <div class="text-center m-4">
+                    <h2>Calificación: {{ dict_item.Calificacion }} %</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}
+
+
+{% macro render_modal_adm(dict_item) -%}
+    <div class="modal fade" id="item_{{ dict_item.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                {#HEADER#}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="itemLabel">{{ dict_item.Cbo_estado }}</h5><br>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="container-fluid">
+                    <span class="font-weight-bold">Detalle: </span>{{ dict_item.DetalleLlamada }}
+                </div>
+
+                {#CUERPO#}
+                <div class="modal-body">
+                    {#BLOQUE1#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "1. Utiliza etiqueta de atención"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">1.1</th>
+                            <td>Saluda al cliente de acuerdo a lo indicado en el Manual de Campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.SaludaCliente == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.SaludaCliente }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.2</th>
+                            <td>Se dirige al cliente por su nombre durante el transcurso de la llamada, sin tutearlo en ninguna
+                                ocasión.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.SeDirigePorNombre == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeDirigePorNombre }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.3</th>
+                            <td>Interactua con el cliente mientras realiza las validaciones en el sistema.</td>
+                            <td class="text-center align-middle {% if dict_item.InteractuaConCliente == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.InteractuaConCliente }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.4</th>
+                            <td>Evita el uso de tecnicismos.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaUsoTecnicismos == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EvitaUsoTecnicismos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1.5</th>
+                            <td>Se despide de acuerdo a lo indicado en el Manual de Campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.SeDespideComoIndicaManual == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeDespideComoIndicaManual }}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 2#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "2. Identifica la necesidad del cliente"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">2.1</th>
+                            <td>Valida si la consulta o transacción corresponde a un producto/servicio/línea de la campaña.</td>
+                            <td class="text-center align-middle {% if dict_item.ValidaConsultaTransaccion == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.ValidaConsultaTransaccion }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.2</th>
+                            <td>Si lo expuesto por el cliente no es claro, realiza preguntas de precisión o preguntas filtro.</td>
+                            <td class="text-center align-middle {% if dict_item.RealizaPreguntasPrecision == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.RealizaPreguntasPrecision }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.3</th>
+                            <td>Valida el MOTIVO REAL de la necesidad (información, preocupación, problema) mediante parafraseo o
+                                pregunta de confirmación.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaMotivoReal == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaMotivoReal }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2.4</th>
+                            <td>De acuerdo a lo expuesto por el cliente valida si existe alguna atención previa por el mismo
+                                motivo.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaAtencionPrevia == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaAtencionPrevia }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 3#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "3. Responde de acuerdo con los procesos establecidos"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">3.1</th>
+                            <td>Solicita el número de documento de identidad o RUC para identificar el servicio, en caso amerite
+                                solicita datos adicionales.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.SolicitaDNIRUC == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.SolicitaDNIRUC }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.2</th>
+                            <td>Valida en el CES el estado de los servicios y equipos, estado de cuenta y adicionalmente si se
+                                encuentra en averia.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaCES == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaCES }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.3</th>
+                            <td>Valida en TRACER que servicio del cliente esta conectado, no se encuentra en averia.</td>
+                            <td class="text-center align-middle {% if dict_item.ValidaTRACER == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaTRACER }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.4</th>
+                            <td>Verifica en la web de averias si el servicio esta afectado.</td>
+                            <td class="text-center align-middle {% if dict_item.VerificaWebAverias == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.VerificaWebAverias }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.5</th>
+                            <td>La atencion se realizo siguiendo el paso a paso de la herramienta o el proceso establecido en el
+                                portal de conocimiento (en caso no se encuentre en la herramienta), no se vuelve a evaluar el
+                                ingreso al CES.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.AtencionPasoAPaso == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.AtencionPasoAPaso }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.5.1</th>
+                            <td>Para cambio de plan, el asesor utiliza correctamente la herramienta de cambio de plan (web).</td>
+                            <td class="text-center align-middle {% if dict_item.UsaCorrectamenteHerramientaCambioPlan == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.UsaCorrectamenteHerramientaCambioPlan }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.5.2</th>
+                            <td>Para cambio de plan, valida servicios, cantidad/tipo de equipos y modelo de EMTA en INCOGNITO o
+                                CES.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ValidaServiciosEMTA == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaServiciosEMTA }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.5.3</th>
+                            <td>Para una explicación de recibo (en caso de prorrateos) el asesor usa herramienta de explicación de
+                                recibo.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.AsesorUsaHerramientaRecibos == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.AsesorUsaHerramientaRecibos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.6</th>
+                            <td>En una consulta por recibo o explicación de recibo, el asesor consulta al cliente si presentaba
+                                problemas con la recepción de recibo. (TITULAR)
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ConsultaClienteRecepcionRecibo == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ConsultaClienteRecepcionRecibo }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.7</th>
+                            <td>Según lo descrito en el paso a paso ofreció a cliente afiliación de notificaciones a su CELULAR
+                                CLARO (Speech/Ref 2) (TITULAR)
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.OfrecionAfiliacionNotificaciones == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.OfrecionAfiliacionNotificaciones }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.8</th>
+                            <td>En transacciones postventa con visita, solicita un número de celular para registrarlo (campo
+                                referencia) y contactarlo.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.SolicitaNumeroTransaccionPostVenta == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SolicitaNumeroTransaccionPostVenta }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.9</th>
+                            <td>Según sea el caso realiza las validaciones de titularidad.</td>
+                            <td class="text-center align-middle {% if dict_item.RealizaValidacionesTitularidad == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.RealizaValidacionesTitularidad }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.10</th>
+                            <td>La explicación brindada al cliente corresponde con el paso a paso de la herramienta o el proceso
+                                establecido en el portal de conocimiento (en caso no se encuentre en la herramienta).
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.ExplicacionBrindadaCorresponde == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ExplicacionBrindadaCorresponde }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3.11</th>
+                            <td>Valida con el cliente si la gestión/información brindada fue clara.</td>
+                            <td class="text-center align-middle {% if dict_item.ValidaConClienteInformacion == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.ValidaConClienteInformacion }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 4#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "4. Registra la información en el sistema"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">4.1</th>
+                            <td>Ejecuta las acciones en todos los aplicativos requeridos por la herramienta o por el proceso
+                                establecido en el portal de conocimiento (en caso no se encuentre en la herramienta) de
+                                acuerdo al diagnóstico.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.EjecutaAccionesAplicativos == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.EjecutaAccionesAplicativos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.2</th>
+                            <td>Se tipifica en SIAC o SGA acorde con la gestión.</td>
+                            <td class="text-center align-middle {% if dict_item.SeTipificaSIACSGA == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeTipificaSIACSGA }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.3</th>
+                            <td>Notas y/o Plantilla de la tipificación son correctas.</td>
+                            <td class="text-center align-middle {% if dict_item.NotasPlantillaTipificacion == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.NotasPlantillaTipificacion }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4.4</th>
+                            <td>Se tipifica en SIAC o SGA durante la llamada.</td>
+                            <td class="text-center align-middle {% if dict_item.SeTipificaEnSIAC == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.SeTipificaEnSIAC }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 5#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "5. Mantiene la calma en todo momento"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">5.1</th>
+                            <td>Evita comentarios negativos de la empresa y/sus proveedores.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaComentariosNegativos == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.EvitaComentariosNegativos }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5.2</th>
+                            <td>Evita palabras soeces.</td>
+                            <td class="text-center align-middle {% if dict_item.EvitaPalabraSoeces == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EvitaPalabraSoeces }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5.3</th>
+                            <td>Escucha al cliente sin interrumpirlo.</td>
+                            <td class="text-center align-middle {% if dict_item.EscuchaClienteSinInterrumpirlo == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.EscuchaClienteSinInterrumpirlo }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    {#BLOQUE 6#}
+                    <table class="table table-bordered m-0">
+                        <thead>
+                        <tr>
+                            <th scope="col" colspan="3"
+                                class="bg-info text-white">{{ "6. Recomendaciones/Beneficios al Cliente"|upper }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row" style="width: 8%">6.1</th>
+                            <td>Partiendo del MOTIVO REAL de la necesidad, realiza recomendaciones y/o refuerza beneficios del
+                                servicio u oferta como arma de fidelización.
+                            </td>
+                            <td class="text-center align-middle {% if dict_item.MotivoRealNecesidad == "NO" %}bg-danger text-white {% endif %}"
+                                style="width: 8%">{{ dict_item.MotivoRealNecesidad }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6.2</th>
+                            <td>Verifica la Oferta disponible para el cliente.</td>
+                            <td class="text-center align-middle {% if dict_item.VerificaOfertaDisponible == "NO" %}bg-danger text-white {% endif %}">{{ dict_item.VerificaOfertaDisponible }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                {#OBSERVACIONES#}
+                <div class="container mt-2 border">
+                    <span class="font-weight-bold">Observaciones: </span>{{ dict_item.ObservacionesAspectoMejora }}
+                </div>
+
+                {#FOOTER#}
+                <div class="modal-footer">
+                    <h5>Calificación: </h5> {{ dict_item.Calificacion }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

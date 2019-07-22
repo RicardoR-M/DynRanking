@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% from "csr/plantillas.html" import render_modal_tec, render_modal_adm %}
+
+{% block body_attribs %} class="bg-dark"{% endblock body_attribs %}
+
+{% block page_content %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Asesor: {{ asesor }}
+        </div>
+        <div class="card-body">
+            <div>
+                <table class="table table-bordered" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th class="text-center" style="width: 40%">Tipo de evaluación</th>
+                        <th class="text-center" style="width: 30%">SN</th>
+                        <th class="text-center" style="width: 30%">Calificación</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th class="text-center" style="width: 40%">Tipo de monitero</th>
+                        <th class="text-center" style="width: 30%">SN</th>
+                        <th class="text-center" style="width: 30%">Calificación</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for item in tabla -%}
+                        <tr>
+                            <td class="text-center">{{ item.TipoEvaluacion }}</td>
+                            <td class="text-center">{{ item.SN }}</td>
+                            <td class="text-center">{{ item.Calificacion|string + " %" }}</td>
+                            <td>
+                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                        data-target="#item_{{ item.id }}">Detalle
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {% for item in tabla %}
+                    {% if skill == "tec" %}
+                        {{ render_modal_tec(item) }}
+                    {% else %}
+                        {{ render_modal_adm(item) }}
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card-footer small text-muted">Actualizado ayer a las 11:59 PM</div>
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/jquery.dataTables.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/dataTables.bootstrap4.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                'language': {
+                    "sProcessing": "Procesando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

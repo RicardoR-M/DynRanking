@@ -52,68 +52,98 @@ class Nomina(db.Model):
         return '<Nomina %r>' % self.e
 
 
-class Cruzado(db.Model):
-    __tablename__ = 'cruzado'
-    id = db.Column(db.Integer, primary_key=True)
-    e = db.Column(db.String(10), index=True, nullable=False)
-    sumatoria = db.Column(db.Float(precision='3,2'))
-    q = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Cruzado %r>' % self.e
-
-
-class Interno(db.Model):
-    __tablename__ = 'interno'
-    id = db.Column(db.Integer, primary_key=True)
-    e = db.Column(db.String(10), index=True, nullable=False)
-    sumatoria = db.Column(db.Float(precision='3,2'))
-    q = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Interno %r>' % self.e
-
-
-class WebCalidad(db.Model):
+class WebCalidadTEC(db.Model):
     __bind_key__ = 'inde'
     __tablename__ = 'TB_TECNICO'
     id = db.Column(db.Integer, primary_key=True)
-    SaludaCliente = db.Column(db.String(150))
-    SeDirigePorNombre = db.Column(db.String(150))
-    InteractuaConCliente = db.Column(db.String(150))
-    EvitaUsoTecnicismos = db.Column(db.String(150))
-    SeDespideComoIndicaManual = db.Column(db.String(150))
-    ValidaConsultaTransaccion = db.Column(db.String(150))
-    RealizaPreguntasPrecision = db.Column(db.String(150))
-    ValidaMotivoReal = db.Column(db.String(150))
-    ValidaAtencionPrevia = db.Column(db.String(150))
-    ValidaCES = db.Column(db.String(150))
-    AtencionPasoAPaso = db.Column(db.String(150))
-    SolicitaDNIRUC = db.Column(db.String(150))
-    ValidaTRACER = db.Column(db.String(150))
-    VerificaWebAverias = db.Column(db.String(150))
-    VerificaParametrosServicios = db.Column(db.String(150))
-    ProblemasInternetIngresaEMTA = db.Column(db.String(150))
-    ProblemasTelefoniaIngresaJANUS = db.Column(db.String(150))
-    ProblemasInternetSmarTV = db.Column(db.String(150))
-    ExplicacionBrindadaCorresponde = db.Column(db.String(150))
-    ValidaConClienteInformacion = db.Column(db.String(150))
-    EjecutaAccionesAplicativos = db.Column(db.String(150))
-    SeTipificaSIACSGA = db.Column(db.String(150))
-    NotasPlantillaTipificacion = db.Column(db.String(150))
-    SeTipificaEnSIAC = db.Column(db.String(150))
-    EvitaComentariosNegativos = db.Column(db.String(150))
-    EvitaPalabraSoeces = db.Column(db.String(150))
-    EscuchaClienteSinInterrumpirlo = db.Column(db.String(150))
-    MotivoRealNecesidad = db.Column(db.String(150))
+    SN = db.Column(db.String(250))
     TipoEvaluacion = db.Column(db.String(250))
     MesMonitoreo = db.Column(db.String(250))
     Asesor = db.Column(db.String(250))
-    SN = db.Column(db.String(250))
     Cbo_estado = db.Column(db.String(150))  # Motivo de llamada
     Nivel_1 = db.Column(db.String(250))  # FCR
     DetalleLlamada = db.Column(db.String(2000))
     ObservacionesAspectoMejora = db.Column(db.String(2000))
+    SaludaCliente = db.Column(db.String(250))
+    SeDirigePorNombre = db.Column(db.String(250))
+    InteractuaConCliente = db.Column(db.String(250))
+    EvitaUsoTecnicismos = db.Column(db.String(250))
+    SeDespideComoIndicaManual = db.Column(db.String(250))
+    ValidaConsultaTransaccion = db.Column(db.String(250))
+    RealizaPreguntasPrecision = db.Column(db.String(250))
+    ValidaMotivoReal = db.Column(db.String(250))
+    ValidaAtencionPrevia = db.Column(db.String(250))
+    ValidaCES = db.Column(db.String(250))
+    AtencionPasoAPaso = db.Column(db.String(250))
+    SolicitaDNIRUC = db.Column(db.String(250))
+    ValidaTRACER = db.Column(db.String(250))
+    VerificaWebAverias = db.Column(db.String(250))
+    VerificaParametrosServicios = db.Column(db.String(250))
+    ProblemasInternetIngresaEMTA = db.Column(db.String(250))
+    ProblemasTelefoniaIngresaJANUS = db.Column(db.String(250))
+    ProblemasInternetSmarTV = db.Column(db.String(250))
+    ExplicacionBrindadaCorresponde = db.Column(db.String(250))
+    ValidaConClienteInformacion = db.Column(db.String(250))
+    EjecutaAccionesAplicativos = db.Column(db.String(250))
+    SeTipificaSIACSGA = db.Column(db.String(250))
+    NotasPlantillaTipificacion = db.Column(db.String(250))
+    SeTipificaEnSIAC = db.Column(db.String(250))
+    EvitaComentariosNegativos = db.Column(db.String(250))
+    EvitaPalabraSoeces = db.Column(db.String(250))
+    EscuchaClienteSinInterrumpirlo = db.Column(db.String(250))
+    MotivoRealNecesidad = db.Column(db.String(250))
+
+
+class WebCalidadADM(db.Model):
+    __bind_key__ = 'inde'
+    __tablename__ = 'TB_ADMINISTRATIVO'
+    id = db.Column(db.Integer, primary_key=True)
+    SN = db.Column(db.String(250))
+    Asesor = db.Column(db.String(250))
+    TipoEvaluacion = db.Column(db.String(250))
+    MesMonitoreo = db.Column(db.String(250))
+    Cbo_estado = db.Column(db.String(150))  # Motivo de llamada
+    Nivel_1 = db.Column(db.String(250))  # FCR
+    DetalleLlamada = db.Column(db.String(2000))
+    ObservacionesAspectoMejora = db.Column(db.String(2000))
+    # Bloque 1
+    SaludaCliente = db.Column(db.String(250))
+    SeDirigePorNombre = db.Column(db.String(250))
+    InteractuaConCliente = db.Column(db.String(250))
+    EvitaUsoTecnicismos = db.Column(db.String(250))
+    SeDespideComoIndicaManual = db.Column(db.String(250))
+    # BLoque 2
+    ValidaConsultaTransaccion = db.Column(db.String(250))
+    RealizaPreguntasPrecision = db.Column(db.String(250))
+    ValidaMotivoReal = db.Column(db.String(250))
+    ValidaAtencionPrevia = db.Column(db.String(250))
+    # BLoque 3
+    SolicitaDNIRUC = db.Column(db.String(250))
+    ValidaCES = db.Column(db.String(250))
+    ValidaTRACER = db.Column(db.String(250))
+    VerificaWebAverias = db.Column(db.String(250))
+    AtencionPasoAPaso = db.Column(db.String(250))
+    UsaCorrectamenteHerramientaCambioPlan = db.Column(db.String(250))
+    ValidaServiciosEMTA = db.Column(db.String(250))
+    AsesorUsaHerramientaRecibos = db.Column(db.String(250))
+    ConsultaClienteRecepcionRecibo = db.Column(db.String(250))
+    OfrecionAfiliacionNotificaciones = db.Column(db.String(250))
+    SolicitaNumeroTransaccionPostVenta = db.Column(db.String(250))
+    RealizaValidacionesTitularidad = db.Column(db.String(250))
+    ExplicacionBrindadaCorresponde = db.Column(db.String(250))
+    ValidaConClienteInformacion = db.Column(db.String(250))
+    # BLoque 4
+    EjecutaAccionesAplicativos = db.Column(db.String(250))
+    SeTipificaSIACSGA = db.Column(db.String(250))
+    NotasPlantillaTipificacion = db.Column(db.String(250))
+    SeTipificaEnSIAC = db.Column(db.String(250))
+    # BLoque 5
+    EvitaComentariosNegativos = db.Column(db.String(250))
+    EvitaPalabraSoeces = db.Column(db.String(250))
+    EscuchaClienteSinInterrumpirlo = db.Column(db.String(250))
+    # BLoque 6
+    MotivoRealNecesidad = db.Column(db.String(75))
+    VerificaOfertaDisponible = db.Column(db.String(75))
 
 
 class EvaluacionesTEC(db.Model):
@@ -129,36 +159,88 @@ class EvaluacionesTEC(db.Model):
     ObservacionesAspectoMejora = db.Column(db.String(2000))
     Calificacion = db.Column(db.Float(precision='3,2'))
     # bloque 1
-    SaludaCliente = db.Column(db.String(150))
-    SeDirigePorNombre = db.Column(db.String(150))
-    InteractuaConCliente = db.Column(db.String(150))
-    EvitaUsoTecnicismos = db.Column(db.String(150))
-    SeDespideComoIndicaManual = db.Column(db.String(150))
+    SaludaCliente = db.Column(db.String(5))
+    SeDirigePorNombre = db.Column(db.String(5))
+    InteractuaConCliente = db.Column(db.String(5))
+    EvitaUsoTecnicismos = db.Column(db.String(5))
+    SeDespideComoIndicaManual = db.Column(db.String(5))
     # bloque 2
-    ValidaConsultaTransaccion = db.Column(db.String(150))
-    RealizaPreguntasPrecision = db.Column(db.String(150))
-    ValidaMotivoReal = db.Column(db.String(150))
-    ValidaAtencionPrevia = db.Column(db.String(150))
+    ValidaConsultaTransaccion = db.Column(db.String(5))
+    RealizaPreguntasPrecision = db.Column(db.String(5))
+    ValidaMotivoReal = db.Column(db.String(5))
+    ValidaAtencionPrevia = db.Column(db.String(5))
     # bloque 3
-    ValidaCES = db.Column(db.String(150))
-    AtencionPasoAPaso = db.Column(db.String(150))
-    SolicitaDNIRUC = db.Column(db.String(150))
-    ValidaTRACER = db.Column(db.String(150))
-    VerificaWebAverias = db.Column(db.String(150))
-    VerificaParametrosServicios = db.Column(db.String(150))
-    ProblemasInternetIngresaEMTA = db.Column(db.String(150))
-    ProblemasTelefoniaIngresaJANUS = db.Column(db.String(150))
-    ProblemasInternetSmarTV = db.Column(db.String(150))
-    ExplicacionBrindadaCorresponde = db.Column(db.String(150))
-    ValidaConClienteInformacion = db.Column(db.String(150))
+    ValidaCES = db.Column(db.String(5))
+    AtencionPasoAPaso = db.Column(db.String(5))
+    SolicitaDNIRUC = db.Column(db.String(5))
+    ValidaTRACER = db.Column(db.String(5))
+    VerificaWebAverias = db.Column(db.String(5))
+    VerificaParametrosServicios = db.Column(db.String(5))
+    ProblemasInternetIngresaEMTA = db.Column(db.String(5))
+    ProblemasTelefoniaIngresaJANUS = db.Column(db.String(5))
+    ProblemasInternetSmarTV = db.Column(db.String(5))
+    ExplicacionBrindadaCorresponde = db.Column(db.String(5))
+    ValidaConClienteInformacion = db.Column(db.String(5))
     # bloque 4
-    EjecutaAccionesAplicativos = db.Column(db.String(150))
-    SeTipificaSIACSGA = db.Column(db.String(150))
-    NotasPlantillaTipificacion = db.Column(db.String(150))
-    SeTipificaEnSIAC = db.Column(db.String(150))
+    EjecutaAccionesAplicativos = db.Column(db.String(5))
+    SeTipificaSIACSGA = db.Column(db.String(5))
+    NotasPlantillaTipificacion = db.Column(db.String(5))
+    SeTipificaEnSIAC = db.Column(db.String(5))
     # bloque 5
-    EvitaComentariosNegativos = db.Column(db.String(150))
-    EvitaPalabraSoeces = db.Column(db.String(150))
-    EscuchaClienteSinInterrumpirlo = db.Column(db.String(150))
+    EvitaComentariosNegativos = db.Column(db.String(5))
+    EvitaPalabraSoeces = db.Column(db.String(5))
+    EscuchaClienteSinInterrumpirlo = db.Column(db.String(5))
     # bloque 6
-    MotivoRealNecesidad = db.Column(db.String(150))
+    MotivoRealNecesidad = db.Column(db.String(5))
+
+
+class EvaluacionesADM(db.Model):
+    __tablename__ = 'evaluaciones_adm'
+    id = db.Column(db.Integer, primary_key=True)
+    SN = db.Column(db.String(250), index=True)
+    Asesor = db.Column(db.String(250), index=True)
+    TipoEvaluacion = db.Column(db.String(250))
+    MesMonitoreo = db.Column(db.String(250))
+    Cbo_estado = db.Column(db.String(150))  # Motivo de llamada
+    Nivel_1 = db.Column(db.String(250))  # FCR
+    DetalleLlamada = db.Column(db.String(2000))
+    ObservacionesAspectoMejora = db.Column(db.String(2000))
+    Calificacion = db.Column(db.Float(precision='3,2'))
+    # Bloque 1
+    SaludaCliente = db.Column(db.String(5))
+    SeDirigePorNombre = db.Column(db.String(5))
+    InteractuaConCliente = db.Column(db.String(5))
+    EvitaUsoTecnicismos = db.Column(db.String(5))
+    SeDespideComoIndicaManual = db.Column(db.String(5))
+    # BLoque 2
+    ValidaConsultaTransaccion = db.Column(db.String(5))
+    RealizaPreguntasPrecision = db.Column(db.String(5))
+    ValidaMotivoReal = db.Column(db.String(5))
+    ValidaAtencionPrevia = db.Column(db.String(5))
+    # BLoque 3
+    SolicitaDNIRUC = db.Column(db.String(5))
+    ValidaCES = db.Column(db.String(5))
+    ValidaTRACER = db.Column(db.String(5))
+    VerificaWebAverias = db.Column(db.String(5))
+    AtencionPasoAPaso = db.Column(db.String(5))
+    UsaCorrectamenteHerramientaCambioPlan = db.Column(db.String(5))
+    ValidaServiciosEMTA = db.Column(db.String(5))
+    AsesorUsaHerramientaRecibos = db.Column(db.String(5))
+    ConsultaClienteRecepcionRecibo = db.Column(db.String(5))
+    OfrecionAfiliacionNotificaciones = db.Column(db.String(5))
+    SolicitaNumeroTransaccionPostVenta = db.Column(db.String(5))
+    RealizaValidacionesTitularidad = db.Column(db.String(5))
+    ExplicacionBrindadaCorresponde = db.Column(db.String(5))
+    ValidaConClienteInformacion = db.Column(db.String(5))
+    # BLoque 4
+    EjecutaAccionesAplicativos = db.Column(db.String(5))
+    SeTipificaSIACSGA = db.Column(db.String(5))
+    NotasPlantillaTipificacion = db.Column(db.String(5))
+    SeTipificaEnSIAC = db.Column(db.String(5))
+    # BLoque 5
+    EvitaComentariosNegativos = db.Column(db.String(5))
+    EvitaPalabraSoeces = db.Column(db.String(5))
+    EscuchaClienteSinInterrumpirlo = db.Column(db.String(5))
+    # BLoque 6
+    MotivoRealNecesidad = db.Column(db.String(5))
+    VerificaOfertaDisponible = db.Column(db.String(5))
