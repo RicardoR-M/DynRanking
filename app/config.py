@@ -40,9 +40,9 @@ class Config:
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'data.db')
-    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mssql+pymssql://sa:***REMOVED***@192.168.3.100/WEB_CALIDAD'
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mssql+pymssql://sa:protected@192.168.3.100/WEB_CALIDAD'
     SQLALCHEMY_BINDS = {
-        'inde': 'mssql+pymssql://readonly:readonly@192.168.3.100/WEB_CALIDAD'
+        'inde': 'mssql+pymssql://protected:protected@192.168.3.100/WEB_CALIDAD'
     }
     # SQLALCHEMY_ENGINE_OPTIONS = {
     #     'connect_args': {'login_timeout': 2}
